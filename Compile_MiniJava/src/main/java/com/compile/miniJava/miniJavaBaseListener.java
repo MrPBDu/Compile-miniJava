@@ -1,4 +1,4 @@
-// Generated from D:/lsc/Compile_MiniJava/src/main/java/com/compile\miniJava.g4 by ANTLR 4.7
+// Generated from C:/Users/Francis Du/IdeaProjects/Compile-miniJava/Compile_MiniJava/src/main/java/com/compile\miniJava.g4 by ANTLR 4.7
 package com.compile.miniJava;
 
 import org.antlr.v4.runtime.ParserRuleContext;

@@ -1,5 +1,5 @@
 grammar miniJava;
-goal : mainclass ( classdeclaration )*;
+goal : mainclass ( classdeclaration )* EOF;
 mainclass : 'class' identifier '{' 'public' 'static' 'void' 'main' '(' 'String' '[' ']' identifier ')' '{' statement '}' '}';
 classdeclaration : 'class' identifier ( 'extends' identifier )? '{' ( vardeclaration )* ( methoddeclaration )* '}';
 vardeclaration : type identifier ';';
@@ -79,5 +79,6 @@ identifier : IDENTIFIER;
 //NEGATE : '!';
 IDENTIFIER : [_a-zA-Z][_a-zA-Z0-9]*;
 INTEGER_LITERAL : [0-9]+;
-COMMENT : ('//'[^\n]*)|('/*'( [\f\n\r\t]|.)*?'*/');
-WS : [\t\n\r]+ -> skip;
+LINECOMMENT : '//'[^\n]* -> skip;
+COMMENT:'/*'( [\f\n\r\t]|.)*?'*/'-> skip;
+WS : [ \t\n\r]+ -> skip;
