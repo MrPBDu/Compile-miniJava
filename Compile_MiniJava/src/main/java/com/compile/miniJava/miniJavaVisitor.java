@@ -89,11 +89,117 @@ public interface miniJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAssignArrayStatement(miniJavaParser.AssignArrayStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link miniJavaParser#expression}.
+	 * Visit a parse tree produced by the {@code AndExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(miniJavaParser.ExpressionContext ctx);
+	T visitAndExpr(miniJavaParser.AndExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code TrueExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrueExpr(miniJavaParser.TrueExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ParenthesisExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenthesisExpr(miniJavaParser.ParenthesisExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NewClassInstanceExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNewClassInstanceExpr(miniJavaParser.NewClassInstanceExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LengthExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLengthExpr(miniJavaParser.LengthExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PlusMinusExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPlusMinusExpr(miniJavaParser.PlusMinusExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NewIntArrayExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNewIntArrayExpr(miniJavaParser.NewIntArrayExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IndexExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIndexExpr(miniJavaParser.IndexExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code FalseExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFalseExpr(miniJavaParser.FalseExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code LessExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLessExpr(miniJavaParser.LessExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ClassExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassExpr(miniJavaParser.ClassExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code CallExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCallExpr(miniJavaParser.CallExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IntExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntExpr(miniJavaParser.IntExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code NotExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotExpr(miniJavaParser.NotExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code TimesExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTimesExpr(miniJavaParser.TimesExprContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code ThisExpr}
+	 * labeled alternative in {@link miniJavaParser#expression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitThisExpr(miniJavaParser.ThisExprContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link miniJavaParser#identifier}.
 	 * @param ctx the parse tree

@@ -26,10 +26,9 @@ public class test{
                 "class Fac{\n" +
                 "\n" +
                 "    public int ComputeFac(int num){\n" +
-                "        int num_aux;\n" +
-                "          j = 0;\n" +
+                "        boolean num_aux;\n" +
                 "        if (num < 1)\n" +
-                "            num_aux = 1;\n" +
+                "            num_aux = new Fac();\n" +
                 "        else\n" +
                 "            num_aux = num * (this.ComputeFac(num-1)) ;\n" +
                 "        return num_aux;\n" +
