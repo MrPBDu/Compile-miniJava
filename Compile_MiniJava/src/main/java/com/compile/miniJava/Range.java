@@ -8,4 +8,6 @@ public interface Range {
     void add(Symbol sym);
 
     Symbol lookup(String name);
+
+    public Symbol lookupinside(String name);
 }

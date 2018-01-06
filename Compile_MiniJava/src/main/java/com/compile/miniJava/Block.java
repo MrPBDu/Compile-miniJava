@@ -45,4 +45,12 @@ public class Block implements Range {
         }
             return null;
     }
+
+    @Override
+    public Symbol lookupinside(String name){
+        Symbol symbol = symbols.get(name);
+        if(symbol != null)
+            return symbol;
+        return null;
+    }
 }
