@@ -8,12 +8,12 @@ type : 'int' '[' ']'
 | 'boolean'
 | 'int'
 | identifier;
-statement : '{' ( statement )* '}'
-| 'if' '(' expression ')' statement 'else' statement
-| 'while' '(' expression ')' statement
-| 'System.out.println' '(' expression ')' ';'
-| identifier '=' expression ';'
-| identifier '[' expression ']' '=' expression ';';
+statement : '{' ( statement )* '}'                                          #BraceStatement
+| 'if' '(' expression ')' statement 'else' statement                      #IfStatement
+| 'while' '(' expression ')' statement                                     #WhileStaement
+| 'System.out.println' '(' expression ')' ';'                          #PrintStatement
+| identifier '=' expression ';'                                              #AssignStatement
+| identifier '[' expression ']' '=' expression ';'                        #AssignArrayStatement;
 expression : expression ( '&&' | '<' | '+' | '-' | '*' ) expression
 |expression '[' expression ']'
 |expression '.' 'length'
