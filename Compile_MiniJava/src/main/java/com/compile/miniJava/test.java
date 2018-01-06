@@ -32,11 +32,12 @@ public class test{
         //The parser taking the token stream for parse tree construction.
 
         miniJavaParser parser = new miniJavaParser(tokens);
-
+        parser.removeErrorListeners();
+        parser.addErrorListener(new UnderlineListener());
+        parser.addErrorListener(new VerboseListener());
 
         ParseTree tree = parser.goal();
+
         System.out.println(tree.getText());
-        System.out.println(tree.getChild(0).getText());
-        System.out.println(tree.getChild(1).getText());
     }
 }
