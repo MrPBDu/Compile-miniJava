@@ -15,7 +15,6 @@ public class Test{
 //        File directory = new File("");
 //        FileInputStream is = new FileInputStream(directory);
 //        ANTLRInputStream input = new ANTLRInputStream(is);
-
         String inputcode = "class Factorial{\n" +
                 "    public static void main(String[] a){\n" +
                 "        System.out.println(new Fac().ComputeFac(10));\n" +
@@ -25,6 +24,8 @@ public class Test{
                 "class Fac {\n" +
                 "\n" +
                 "    public int ComputeFac(int num){\n" +
+                "          int i = 0;\n" +
+                "          int i = 0;\n" +
                 "        int num_aux;\n" +
                 "        if (num < 1)\n" +
                 "            num_aux = 1;\n" +

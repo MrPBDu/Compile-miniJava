@@ -71,6 +71,8 @@ public class BuildPhase extends miniJavaBaseListener {
     @Override
     public void enterVardeclaration(miniJavaParser.VardeclarationContext ctx) {
         String varname = ctx.identifier().getText();
+        if(currentRange.lookup(varname) != null)
+            System.err.println("duplicate define" + varname);
         String type = ctx.type().getText();
         VarType varType = getTypeFromTypeName(type);
         if(varType != VarType.typeClass)
@@ -102,8 +104,16 @@ public class BuildPhase extends miniJavaBaseListener {
         if(varType != VarType.typeClass)
             methodSymbol = new MethodSymbol(methodname, varType);
         else {
-
             methodSymbol = new MethodSymbol(methodname, new ClassSymbol(returnTypeName));
+        }
+        currentRange.add(methodSymbol);
+        String parameter = ctx.identifier(1).getText();
+        String parameterTypeName = ctx.type(1).getText();
+        VarType parameterType = getTypeFromTypeName(parameterTypeName);
+        if(varType != VarType.typeClass)
+            methodSymbol = new MethodSymbol(parameter, parameterType);
+        else {
+            methodSymbol = new MethodSymbol(parameter, new ClassSymbol(parameterTypeName));
         }
         currentRange.add(methodSymbol);
         currentRange = new Block(currentRange);

@@ -23,10 +23,11 @@ public class test{
                 "    }\n" +
                 "}\n" +
                 "\n" +
-                "class Fac {\n" +
+                "class Fac{\n" +
                 "\n" +
                 "    public int ComputeFac(int num){\n" +
                 "        int num_aux;\n" +
+                "          j = 0;\n" +
                 "        if (num < 1)\n" +
                 "            num_aux = 1;\n" +
                 "        else\n" +
@@ -62,6 +63,8 @@ public class test{
         ParseTreeWalker walker = new ParseTreeWalker();
         BuildPhase b = new BuildPhase();
         walker.walk(b, tree);
+        CheckPhase c = new CheckPhase(b.globalBlock,b.range,b.getClassScopes());
+        walker.walk(c, tree);
 
 //        System.out.println(tree.getText());
 //        System.out.println(tree.getChild(0).getText());
