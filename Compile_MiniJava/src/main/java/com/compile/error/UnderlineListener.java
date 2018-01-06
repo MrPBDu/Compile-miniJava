@@ -1,11 +1,11 @@
-package com.compile.miniJava;
+package com.compile.error;
 
 import org.antlr.v4.runtime.*;
 
 public class UnderlineListener extends BaseErrorListener {
     public void syntaxError(Recognizer<?, ?> recognizer,
-                            Object offendingSymbol, int line,
-                            int charPositionInLine,
+                            Object offendingSymbol,
+                            int line, int charPositionInLine,
                             String msg,
                             RecognitionException e)
     {
@@ -13,7 +13,6 @@ public class UnderlineListener extends BaseErrorListener {
         underlineError(recognizer,(Token)offendingSymbol,
                 line, charPositionInLine);
     }
-
     protected void underlineError(Recognizer recognizer,
                                   Token offendingToken, int line,
                                   int charPositionInLine) {
@@ -29,5 +28,6 @@ public class UnderlineListener extends BaseErrorListener {
         if ( start>=0 && stop>=0 ) {
             for (int i=start; i<=stop; i++) System.err.print("^");
         }
-        System.err.println(); }
+        System.err.println();
+    }
 }

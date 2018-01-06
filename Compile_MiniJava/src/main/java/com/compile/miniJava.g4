@@ -79,6 +79,6 @@ identifier : IDENTIFIER;
 //NEGATE : '!';
 IDENTIFIER : [_a-zA-Z][_a-zA-Z0-9]*;
 INTEGER_LITERAL : [0-9]+;
-LINECOMMENT : '//'[^\n]* -> skip;
-COMMENT:'/*'( [\f\n\r\t]|.)*?'*/'-> skip;
+LINECOMMENT : '//'[^\n\r]* -> skip;
+COMMENT:'/*'.*?'*/'-> skip;
 WS : [ \t\n\r]+ -> skip;

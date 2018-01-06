@@ -1,4 +1,4 @@
-package com.compile.miniJava;
+package com.compile;
 import com.compile.error.LexUnderlineListener;
 import com.compile.error.UnderlineListener;
 import com.compile.error.VerboseListener;
@@ -7,11 +7,10 @@ import com.compile.miniJava.miniJavaParser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
 import java.io.*;
 
-public class test{
+public class Test{
     public static void main (String[] args)throws IOException, FileNotFoundException {
 //        File directory = new File("");
 //        FileInputStream is = new FileInputStream(directory);
@@ -58,10 +57,6 @@ public class test{
         parser.addErrorListener(new UnderlineListener());
 
         ParseTree tree = parser.goal();
-
-        ParseTreeWalker walker = new ParseTreeWalker();
-        BuildPhase b = new BuildPhase();
-        walker.walk(b, tree);
 
 //        System.out.println(tree.getText());
 //        System.out.println(tree.getChild(0).getText());
