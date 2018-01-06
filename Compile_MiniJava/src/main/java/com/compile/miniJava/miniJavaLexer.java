@@ -1,4 +1,4 @@
-// Generated from C:/Users/Lenovo/IdeaProjects/Compile-miniJava/Compile_MiniJava/src/main/java/com/compile\miniJava.g4 by ANTLR 4.7
+// Generated from C:/Users/Francis Du/IdeaProjects/Compile-miniJava/Compile_MiniJava/src/main/java/com/compile\miniJava.g4 by ANTLR 4.7
 package com.compile.miniJava;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
@@ -205,11 +205,5 @@ public class miniJavaLexer extends Lexer {
 		for (int i = 0; i < _ATN.getNumberOfDecisions(); i++) {
 			_decisionToDFA[i] = new DFA(_ATN.getDecisionState(i), i);
 		}
-	}
-	public void notifyListeners(LexerNoViableAltException e) {
-		String text = this._input.getText(Interval.of(this._tokenStartCharIndex, this._input.index()));
-		String msg = "token recognition error at: '" + this.getErrorDisplay(text) + "'";
-		ANTLRErrorListener listener = this.getErrorListenerDispatch();
-		listener.syntaxError(this, (Object)null, this._tokenStartLine, this._tokenStartCharPositionInLine, msg, e);
 	}
 }

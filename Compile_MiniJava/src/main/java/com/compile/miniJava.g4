@@ -10,7 +10,7 @@ type : 'int' '[' ']'
 | identifier;
 statement : '{' ( statement )* '}'                                          #BraceStatement
 | 'if' '(' expression ')' statement 'else' statement                      #IfStatement
-| 'while' '(' expression ')' statement                                     #WhileStaement
+| 'while' '(' expression ')' statement                                     #WhileStatement
 | 'System.out.println' '(' expression ')' ';'                          #PrintStatement
 | identifier '=' expression ';'                                              #AssignStatement
 | identifier '[' expression ']' '=' expression ';'                        #AssignArrayStatement;

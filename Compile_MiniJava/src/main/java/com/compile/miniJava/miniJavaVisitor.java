@@ -1,4 +1,4 @@
-// Generated from C:/Users/Lenovo/IdeaProjects/Compile-miniJava/Compile_MiniJava/src/main/java/com/compile\miniJava.g4 by ANTLR 4.7
+// Generated from C:/Users/Francis Du/IdeaProjects/Compile-miniJava/Compile_MiniJava/src/main/java/com/compile\miniJava.g4 by ANTLR 4.7
 package com.compile.miniJava;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -47,11 +47,47 @@ public interface miniJavaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitType(miniJavaParser.TypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link miniJavaParser#statement}.
+	 * Visit a parse tree produced by the {@code BraceStatement}
+	 * labeled alternative in {@link miniJavaParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatement(miniJavaParser.StatementContext ctx);
+	T visitBraceStatement(miniJavaParser.BraceStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code IfStatement}
+	 * labeled alternative in {@link miniJavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfStatement(miniJavaParser.IfStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code WhileStatement}
+	 * labeled alternative in {@link miniJavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhileStatement(miniJavaParser.WhileStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code PrintStatement}
+	 * labeled alternative in {@link miniJavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrintStatement(miniJavaParser.PrintStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AssignStatement}
+	 * labeled alternative in {@link miniJavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignStatement(miniJavaParser.AssignStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code AssignArrayStatement}
+	 * labeled alternative in {@link miniJavaParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignArrayStatement(miniJavaParser.AssignArrayStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link miniJavaParser#expression}.
 	 * @param ctx the parse tree
