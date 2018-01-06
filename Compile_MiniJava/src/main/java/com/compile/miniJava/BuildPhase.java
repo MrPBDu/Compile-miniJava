@@ -1,5 +1,8 @@
 package com.compile.miniJava;
 
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
 import java.util.HashMap;
@@ -71,8 +74,10 @@ public class BuildPhase extends miniJavaBaseListener {
     @Override
     public void enterVardeclaration(miniJavaParser.VardeclarationContext ctx) {
         String varname = ctx.identifier().getText();
-        if(currentRange.lookup(varname) != null)
-            System.err.println("duplicate define" + varname);
+        if(currentRange.lookupinside(varname) != null) {
+            printError(ctx.identifier().IDENTIFIER().getSymbol(), "duplicate defination of '" + varname + "'");
+
+        }
         String type = ctx.type().getText();
         VarType varType = getTypeFromTypeName(type);
         if(varType != VarType.typeClass)
@@ -123,5 +128,20 @@ public class BuildPhase extends miniJavaBaseListener {
     @Override
     public void exitMethoddeclaration(miniJavaParser.MethoddeclarationContext ctx) {
         currentRange = currentRange.getParentRange();
+    }
+
+    static void printError(Token t, String msg) {
+        System.err.printf("line %d:%d %s \n", t.getLine(), t.getCharPositionInLine(), msg);
+        CharStream tokens =
+                (CharStream)t.getInputStream();
+        String input = tokens.toString();
+        String[] lines = input.split("\n");
+        String errorLine = lines[t.getLine() - 1];
+        System.err.println(errorLine);
+        for (int i=0; i<t.getCharPositionInLine(); i++) System.err.print(" ");
+        int i =t.getCharPositionInLine();
+        System.err.print("^");
+
+        System.err.println();
     }
 }
