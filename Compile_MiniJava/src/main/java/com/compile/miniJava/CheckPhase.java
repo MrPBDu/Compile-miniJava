@@ -1,5 +1,6 @@
 package com.compile.miniJava;
 
+import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
 
@@ -43,6 +44,13 @@ public class CheckPhase extends miniJavaBaseListener {
 
     @Override
     public void enterClassdeclaration(miniJavaParser.ClassdeclarationContext ctx) {
+
+        if(ctx.identifier().size()>1){
+            String inheritclassname = ctx.identifier(1).getText();
+            if(inheritclassname == null || classRange.get(inheritclassname) == null)
+                printError(ctx.identifier(1).IDENTIFIER().getSymbol(),"inherit class '" + inheritclassname + "' doesn't exist");
+        }
+
         currentRange = range.get(ctx);
     }
 
@@ -90,7 +98,7 @@ public class CheckPhase extends miniJavaBaseListener {
             String varname = ctx.IDENTIFIER().getText();
 
             if (currentRange.lookup(varname) == null) {
-                System.err.println("variable or class not defined" + varname);
+                printError(ctx.IDENTIFIER().getSymbol(),"variable or class not defined '" + varname + "'");
             }
         } catch (Exception e) {
             printError(ctx.getStart(), "Compiler met an unrecognizable error.");
@@ -99,139 +107,16 @@ public class CheckPhase extends miniJavaBaseListener {
 
     static void printError(Token t, String msg) {
         System.err.printf("line %d:%d %s \n", t.getLine(), t.getCharPositionInLine(), msg);
-    }
-
-    @Override
-    public void exitIfStatement(miniJavaParser.IfStatementContext ctx) {
-        try {
-            miniJavaParser.ExpressionContext exprCtx = ctx.expression();
-            if ( (ctx.expression().getRuleIndex() != 6) &&(ctx.expression().getRuleIndex() != 7)) {
-                printError(exprCtx.getStart(), "The condition of the If statement must be boolean expression.");
-            }
-        } catch (Exception e) {
-            printError(ctx.getStart(), "Compiler met an unrecognizable error.");
-        }
-    }
-
-    @Override
-    public void exitWhileStatement(miniJavaParser.WhileStatementContext ctx) {
-        try {
-            miniJavaParser.ExpressionContext exprCtx = ctx.expression();
-            if ((ctx.expression().getRuleIndex() != 6) &&(ctx.expression().getRuleIndex() != 7)) {
-                printError(exprCtx.getStart(), "The condition of the While statement must be boolean expression.");
-            }
-        } catch (Exception e) {
-            printError(ctx.getStart(), "Compiler met an unrecognizable error.");
-        }
-    }
-
-    @Override
-    public void exitPrintStatement(miniJavaParser.PrintStatementContext ctx) {
-        try {
-            miniJavaParser.ExpressionContext exprCtx = ctx.expression();
-            switch (ctx.expression().getRuleIndex()) {
-                case 5:
-                case 6:
-                case 7:
-                    break;
-                default:
-                    printError(exprCtx.getStart(), "The printed expression must be int/string/boolean expression.");
-            }
-        } catch (Exception e) {
-            //printError(ctx.getStart(), e.getMessage());
-        }
-    }
-
-
-
-
-    @Override
-    public void exitClassExpr(miniJavaParser.ClassExprContext ctx) {
-        try {
-            Symbol symbol = currentRange.lookup(ctx.getText());
-            if (symbol == null) {
-                printError(ctx.getStart(), "The class " + ctx.getText() + " doesn't exist.");
-            } else {
-                switch (symbol.getSymbolType()) {
-                    case classSymbol:
-                        printError(ctx.getStart(), "Expected to get instance but class symbol " + ctx.getText() + ".");
-                        break;
-                    case methodSymbol:
-                        printError(ctx.getStart(), "Expected to get class but method symbol " + ctx.getText() + ".");
-                        break;
-                    case varSymbol:
-                        VarSymbol varSymbol = (VarSymbol) symbol;
-                        switch (varSymbol.getVarType()) {
-                            case typeClass:
-                                exprType.put(ctx, varSymbol.getVarType());
-                                exprClassSymbol.put(ctx, varSymbol.getClassType());
-                                break;
-                            default:
-                                exprType.put(ctx, varSymbol.getVarType());
-                        }
-                }
-            }
-        } catch (Exception e) {
-            printError(ctx.getStart(), "Compiler met an unrecognizable error.");
-        }
-    }
-    @Override
-    public void exitThisExpr(miniJavaParser.ThisExprContext ctx) {
-        exprType.put(ctx, VarType.typeClass);
-        exprClassSymbol.put(ctx, currentRange.getClassSymbol());
-    }
-
-    @Override
-    public void exitNewIntArrayExpr(miniJavaParser.NewIntArrayExprContext ctx) {
-        try {
-            if (exprType.get(ctx.expression()) != VarType.typeInt) {
-                printError(ctx.expression().getStart(), "The index of the array must be Int.");
-            }
-            exprType.put(ctx, VarType.typeIntArray);
-        } catch (Exception e) {
-            printError(ctx.getStart(), "Compiler met an unrecognizable error.");
-        }
-    }
-
-    @Override
-    public void exitNewClassInstanceExpr(miniJavaParser.NewClassInstanceExprContext ctx) {
-        try {
-            Symbol newInstance = currentRange.lookup(ctx.identifier().getText());
-            if (newInstance == null) {
-                printError(ctx.identifier().IDENTIFIER().getSymbol(), "The symbol " + ctx.identifier().getText() + " doesn't exist.");
-            } else if (newInstance.getSymbolType() != Type.classSymbol) {
-                printError(ctx.identifier().IDENTIFIER().getSymbol(), "The symbol " + ctx.identifier().getText() + " is not a class symbol.");
-            } else {
-                exprType.put(ctx, VarType.typeClass);
-                exprClassSymbol.put(ctx, (ClassSymbol) newInstance);
-            }
-        } catch (Exception e) {
-            printError(ctx.getStart(), "Compiler met an unrecognizable error.");
-        }
-    }
-
-    @Override
-    public void exitNotExpr(miniJavaParser.NotExprContext ctx) {
-        try {
-            if (exprType.get(ctx.expression()) != VarType.typeBoolean) {
-                printError(ctx.expression().getStart(), "! operator must be operated on boolean variable.");
-            }
-            exprType.put(ctx, VarType.typeBoolean);
-        } catch (Exception e) {
-            printError(ctx.getStart(), "Compiler met an unrecognizable error.");
-        }
-    }
-
-    @Override
-    public void exitParenthesisExpr(miniJavaParser.ParenthesisExprContext ctx) {
-        try {
-            exprType.put(ctx, exprType.get(ctx.expression()));
-            if (exprType.get(ctx.expression()) == VarType.typeClass) {
-                exprClassSymbol.put(ctx, exprClassSymbol.get(ctx.expression()));
-            }
-        } catch (Exception e) {
-            printError(ctx.getStart(), "Compiler met an unrecognizable error.");
-        }
+        CharStream tokens =
+                (CharStream)t.getInputStream();
+        String input = tokens.toString();
+        String[] lines = input.split("\n");
+        String errorLine = lines[t.getLine() - 1];
+        System.err.println(errorLine);
+        for (int i=0; i<t.getCharPositionInLine(); i++) System.err.print(" ");
+        int i =t.getCharPositionInLine();
+        System.err.print("^");
+        System.err.println();
     }
 
 }

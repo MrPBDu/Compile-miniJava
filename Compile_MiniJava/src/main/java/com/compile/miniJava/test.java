@@ -23,7 +23,7 @@ public class test{
                 "    }\n" +
                 "}\n" +
                 "\n" +
-                "class Fac{\n" +
+                "class Fac {\n" +
                 "\n" +
                 "    public int ComputeFac(int num){\n" +
                 "        boolean num_aux;\n" +
