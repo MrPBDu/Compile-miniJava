@@ -13,8 +13,6 @@ public class CheckPhase extends miniJavaBaseListener {
     Range currentRange;
     ParseTreeProperty<Range> range = new ParseTreeProperty<>();
     Map<ClassSymbol, Range> classRange;
-    ParseTreeProperty<VarType> exprType = new ParseTreeProperty<>();
-    ParseTreeProperty<ClassSymbol> exprClassSymbol = new ParseTreeProperty<>();
 
     CheckPhase(Block globalBlock, ParseTreeProperty<Range> range, Map<ClassSymbol, Range> classRange) {
         this.globalBlock = globalBlock;

@@ -17,25 +17,9 @@ public class test{
 //        FileInputStream is = new FileInputStream(directory);
 //        ANTLRInputStream input = new ANTLRInputStream(is);
 
-        String inputcode = "class Factorial{\n" +
-                "    public static void main(String[] a){\n" +
-                "        System.out.println(new Fac().ComputeFac(10));\n" +
-                "    }\n" +
-                "}\n" +
-                "\n" +
-                "class Fac {\n" +
-                "\n" +
-                "    public int ComputeFac(int num){\n" +
-                "        boolean num_aux;\n" +
-                "        if (num < 1)\n" +
-                "            num_aux = new Fac();\n" +
-                "        else\n" +
-                "            num_aux = num * (this.ComputeFac(num-1)) ;\n" +
-                "        return num_aux;\n" +
-                "    }\n" +
-                "\n" +
-                "}" ;
-        ANTLRInputStream input = new ANTLRInputStream(inputcode);
+        File file = new File("D:\\download\\factorial.java");
+        FileInputStream fis = new FileInputStream(file);
+        ANTLRInputStream input = new ANTLRInputStream(fis);
 
         //A lexer object for lexing(tokenizing) the file input stream.
 
